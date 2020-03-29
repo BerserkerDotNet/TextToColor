@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
 namespace TextToColor
 {
+    [DebuggerDisplay("HSLA = ({H}, {S}, {L}, {A})")]
     public class HSLA
     {
         public HSLA(ulong h, float s, float l, float alpha)

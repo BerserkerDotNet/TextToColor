@@ -7,7 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextToColor", "src\TextToCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextToColor.Tests", "tests\TextToColor.Tests\TextToColor.Tests.csproj", "{7ED1A831-5EC2-4893-BA7E-BF07EC13DBD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToColor.Benchmarks", "tests\TextToColor.Benchmarks\TextToColor.Benchmarks.csproj", "{162F690E-B817-4CD4-9532-5D1D91309DE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextToColor.Benchmarks", "tests\TextToColor.Benchmarks\TextToColor.Benchmarks.csproj", "{162F690E-B817-4CD4-9532-5D1D91309DE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{B2E0829F-83E7-4ADF-8D11-19BD7A03A245}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C472ED52-8637-4EA1-90EA-CEC12470A04D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		version.json = version.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +35,8 @@ Global
 		{162F690E-B817-4CD4-9532-5D1D91309DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{162F690E-B817-4CD4-9532-5D1D91309DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{162F690E-B817-4CD4-9532-5D1D91309DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E0829F-83E7-4ADF-8D11-19BD7A03A245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E0829F-83E7-4ADF-8D11-19BD7A03A245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

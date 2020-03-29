@@ -15,7 +15,7 @@
     <PackageTags>Text Color ToColor Colorize System.Drawing</PackageTags>
     <PackageIcon>logo.png</PackageIcon>
     <Description>A set of extensions to convert text to System.Drawing.Color.</Description>
-    <Copyright>Andrii Snihyr 2019</Copyright>
+    <Copyright>Andrii Snihyr 2020</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,12 +31,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="images\logo.png" Pack="true" PackagePath="" />
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.0.28">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
