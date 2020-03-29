@@ -83,7 +83,7 @@ class Build : NukeBuild
                 .EnableNoRestore()
                 .EnableIncludeSymbols()
                 .EnableIncludeSource()
-                .SetOutputDirectory(ArtifactsDirectory));
+                .SetOutputDirectory(ArtifactsDirectory / "Packages"));
         });
 
     Target PublishAzureDevOpsArtifacts => _ => _
@@ -99,6 +99,6 @@ class Build : NukeBuild
                 testFiles,
                 mergeResults: true,
                 configuration: Configuration);
-            AzurePipelines.Instance.UploadArtifacts("Container", "drop", ArtifactsDirectory);
+            AzurePipelines.Instance.UploadArtifacts("Container", "drop", "artifacts");
         });
 }
