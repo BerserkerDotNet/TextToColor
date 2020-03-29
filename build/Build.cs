@@ -8,6 +8,7 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities.Collections;
+using System.Linq;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -90,12 +91,14 @@ class Build : NukeBuild
         .OnlyWhenStatic(() => AzurePipelines.Instance != null)
         .Executes(() =>
         {
+            var testFiles = Glob.Files(ArtifactsDirectory / "TestResults", "*.trx")
+                .Select(f => (string)(ArtifactsDirectory / "TestResults" / f));
+
             AzurePipelines.Instance.PublishTestResults("TextToColor unit tests",
                 AzurePipelinesTestResultsType.NUnit,
-                Glob.Files(ArtifactsDirectory / "TestResults", "*.trx"),
+                testFiles,
                 mergeResults: true,
                 configuration: Configuration);
-
-            AzurePipelines.Instance.UploadArtifacts(ArtifactsDirectory, "drop", "artifacts");
+            AzurePipelines.Instance.UploadArtifacts(ArtifactsDirectory, "drop", "Container");
         });
 }
