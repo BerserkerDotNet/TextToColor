@@ -1,0 +1,23 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: UseDotNet@2
+  displayName: "Use DotNET 3.1"
+  inputs:
+    packageType: "sdk"
+    version: "3.1.100"
+    includePreviewVersions: true
+- task: PowerShell@2
+  displayName: 'Build & Package'
+  inputs:
+    filePath: 'build.ps1'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts'
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'

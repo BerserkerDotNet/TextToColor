@@ -1,15 +1,13 @@
-using System;
-using System.Linq;
+using GlobExpressions;
 using Nuke.Common;
+using Nuke.Common.CI.AzurePipelines;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -18,7 +16,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
 {
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main () => Execute<Build>(x => x.Package);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -60,8 +58,21 @@ class Build : NukeBuild
                 .EnableNoRestore());
         });
 
-    Target Package => _ => _
+    Target Test => _ => _
         .DependsOn(Compile)
+        .Executes(() =>
+        {
+            DotNetTest(s => s
+                .SetProjectFile(Solution.GetProject("TextToColor.Tests"))
+                .SetConfiguration(Configuration)
+                .SetLogger("trx")
+                .SetResultsDirectory(ArtifactsDirectory / "TestResults")
+                .EnableNoBuild()
+                .EnableNoRestore());
+        });
+
+    Target Package => _ => _
+        .DependsOn(Test)
         .Executes(() =>
         {
             DotNetPack(s => s
@@ -72,5 +83,19 @@ class Build : NukeBuild
                 .EnableIncludeSymbols()
                 .EnableIncludeSource()
                 .SetOutputDirectory(ArtifactsDirectory));
+        });
+
+    Target PublishAzureDevOpsArtifacts => _ => _
+        .TriggeredBy(Test)
+        .OnlyWhenStatic(() => AzurePipelines.Instance != null)
+        .Executes(() =>
+        {
+            AzurePipelines.Instance.PublishTestResults("TextToColor unit tests",
+                AzurePipelinesTestResultsType.NUnit,
+                Glob.Files(ArtifactsDirectory / "TestResults", "*.trx"),
+                mergeResults: true,
+                configuration: Configuration);
+
+            AzurePipelines.Instance.UploadArtifacts(ArtifactsDirectory, "drop", "artifacts");
         });
 }

@@ -6,7 +6,7 @@ A set of extensions to convert text to System.Drawing.Color.
 [![Nuget](https://buildstats.info/nuget/TextToColor?v=1.0.0)](https://www.nuget.org/packages/TextToColor)
 
 ### Usage
-1. Install `TextToColor` package
+1. Install `TextToColor` NuGet package
 1. Add a using statement ` using TextToColor`
 1. Call `ToColor()` or `ToHsl()`extension method on any string
 
