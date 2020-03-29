@@ -99,6 +99,6 @@ class Build : NukeBuild
                 testFiles,
                 mergeResults: true,
                 configuration: Configuration);
-            AzurePipelines.Instance.UploadArtifacts("Container", "drop", "artifacts");
+            AzurePipelines.Instance.UploadArtifacts("Container", "drop", ArtifactsDirectory);
         });
 }
