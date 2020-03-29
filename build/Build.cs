@@ -83,11 +83,11 @@ class Build : NukeBuild
                 .EnableNoRestore()
                 .EnableIncludeSymbols()
                 .EnableIncludeSource()
-                .SetOutputDirectory(ArtifactsDirectory / "Packages"));
+                .SetOutputDirectory(ArtifactsDirectory));
         });
 
     Target PublishAzureDevOpsArtifacts => _ => _
-        .TriggeredBy(Test)
+        .TriggeredBy(Package)
         .OnlyWhenStatic(() => AzurePipelines.Instance != null)
         .Executes(() =>
         {
