@@ -1,7 +1,7 @@
 # TextToColor
 A set of extensions to convert text to System.Drawing.Color.
 
-[![Build Status](https://berserkerdotnet.visualstudio.com/GitHubProjects/_apis/build/status/BerserkerDotNet.TextToColor?branchName=master)](https://berserkerdotnet.visualstudio.com/GitHubProjects/_build/latest?definitionId=14&branchName=master)
+[![Build Status](https://berserkerdotnet.visualstudio.com/GitHubProjects/_apis/build/status/BerserkerDotNet.TextToColor?branchName=master)](https://berserkerdotnet.visualstudio.com/GitHubProjects/_build/latest?definitionId=15&branchName=master)
 
 [![Nuget](https://buildstats.info/nuget/TextToColor?v=1.0.0)](https://www.nuget.org/packages/TextToColor)
 
