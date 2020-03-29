@@ -95,10 +95,10 @@ class Build : NukeBuild
                 .Select(f => (string)(ArtifactsDirectory / "TestResults" / f));
 
             AzurePipelines.Instance.PublishTestResults("TextToColor unit tests",
-                AzurePipelinesTestResultsType.NUnit,
+                AzurePipelinesTestResultsType.VSTest,
                 testFiles,
                 mergeResults: true,
                 configuration: Configuration);
-            AzurePipelines.Instance.UploadArtifacts(ArtifactsDirectory, "drop", "Container");
+            AzurePipelines.Instance.UploadArtifacts("Container", "drop", ArtifactsDirectory);
         });
 }
